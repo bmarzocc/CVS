@@ -1,0 +1,25 @@
+root://eoscms.cern.ch//eos/cms/store/caf/user/bmarzocc/Plots_Radiontrees_1btagT/Plots_tree_Radion_m300_8TeV_nm.root 1. H->ggbb 5 0
+root://eoscms.cern.ch//eos/cms/store/caf/user/bmarzocc/Plots_Radiontrees_1btagT/Plots_tree_MCBackgrounds_DiPhotonJets-madgraph_diphojet_8TeV.root 1. #gamma#gamma+jets 4 1
+root://eoscms.cern.ch//eos/cms/store/caf/user/bmarzocc/Plots_Radiontrees_1btagT/Plots_tree_MCBackground_dipho_Box_25_8TeV.root 1. #gamma#gamma_box 2 2
+root://eoscms.cern.ch//eos/cms/store/caf/user/bmarzocc/Plots_Radiontrees_1btagT/Plots_tree_MCBackground_dipho_Box_250_8TeV.root 1. #gamma#gamma_box 2 2
+root://eoscms.cern.ch//eos/cms/store/caf/user/bmarzocc/Plots_Radiontrees_1btagT/Plots_tree_MCBackground_gjets_20_8TeV_pf.root 1. #gamma+jets 9 3
+root://eoscms.cern.ch//eos/cms/store/caf/user/bmarzocc/Plots_Radiontrees_1btagT/Plots_tree_MCBackground_gjets_40_8TeV_pf.root 1. #gamma+jets 9 3
+root://eoscms.cern.ch//eos/cms/store/caf/user/bmarzocc/Plots_Radiontrees_1btagT/Plots_tree_MCBackground_gjets_20_8TeV_pp.root 1. #gamma+jets 9 3
+#root://eoscms.cern.ch//eos/cms/store/caf/user/bmarzocc/Plots_Radiontrees_1btagT/Plots_tree_MCBackground_gjets_40_8TeV_pp.root 1. #gamma+jets 9 3
+root://eoscms.cern.ch//eos/cms/store/caf/user/bmarzocc/Plots_Radiontrees_1btagT/Plots_tree_MCBackground_qcd_30_8TeV_ff.root 1. QCD 8 4
+root://eoscms.cern.ch//eos/cms/store/caf/user/bmarzocc/Plots_Radiontrees_1btagT/Plots_tree_MCBackground_qcd_40_8TeV_ff.root 1. QCD 8 4
+root://eoscms.cern.ch//eos/cms/store/caf/user/bmarzocc/Plots_Radiontrees_1btagT/Plots_tree_MCBackground_qcd_30_8TeV_pf.root 1. QCD 8 4
+root://eoscms.cern.ch//eos/cms/store/caf/user/bmarzocc/Plots_Radiontrees_1btagT/Plots_tree_MCBackground_qcd_40_8TeV_pf.root 1. QCD 8 4
+root://eoscms.cern.ch//eos/cms/store/caf/user/bmarzocc/Plots_Radiontrees_1btagT/Plots_tree_MCBackgrounds_DY_WG_DYJetsToLL.root 1. DY 7 5
+root://eoscms.cern.ch//eos/cms/store/caf/user/bmarzocc/Plots_Radiontrees_1btagT/Plots_tree_MCBackgrounds_DY_WG_WGToLNuG.root 1. DY 7 5
+root://eoscms.cern.ch//eos/cms/store/caf/user/bmarzocc/Plots_Radiontrees_1btagT/Plots_tree_MCBackground_ZZJetsTo2L2Q.root 1. DY 7 5
+root://eoscms.cern.ch//eos/cms/store/caf/user/bmarzocc/Plots_Radiontrees_1btagT/Plots_tree_MCBackground_TTJets.root 1. DY 7 5
+root://eoscms.cern.ch//eos/cms/store/caf/user/bmarzocc/Plots_Radiontrees_1btagT/Plots_tree_MCBackground_TTGJets.root 1. DY 7 5
+root://eoscms.cern.ch//eos/cms/store/caf/user/bmarzocc/Plots_Radiontrees_1btagT/Plots_tree_MCBackgrounds_ttgg_Zgg_Zgg_dR02.root 1. DY 7 5
+root://eoscms.cern.ch//eos/cms/store/caf/user/bmarzocc/Plots_Radiontrees_1btagT/Plots_tree_MCBackgrounds_ttgg_Zgg_ttgg_dR02.root 1. DY 7 5
+
+
+
+
+
+
