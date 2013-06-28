@@ -1,0 +1,13 @@
+-------------------------------------
+------- MakeWebPage Tool ------------
+-------------------------------------
+
+Run the code: sh makeWebPage.sh -d <inputDir> -s <name1> -r <name2> -l <html dir> -w <which dir>
+              -> <inputDir>: directory where there are the .png files created by the .cpp files 
+              -> <name1>: name of the Data sample (e.g.: LCD)
+              -> <name2>: name of the MC sample (e.g.: LC1)
+              -> <comptype>: name of the comparison label (e.g.: MC_vs_MC)
+              -> <html_dir>: base html directory, by default it is: 
+                             /afs/cern.ch/user/c/ccecal/scratch0/www/ValidationPlots/MC_studies
+              -> <which_dir>: name of the directory where the .png files are copied and the .html file is created. 
+                              This directory is created in <html dir>
