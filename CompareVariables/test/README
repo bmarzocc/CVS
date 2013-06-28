@@ -1,0 +1,136 @@
+-------------------------------------
+------- CompareVariables Tool -------
+-------------------------------------
+
+Download and compile the package :
+
+export CVS_RSH=ssh
+
+export CVSROOT=:ext:USERNAME@cmscvs.cern.ch:/cvs_server/repositories/CMSSW
+
+cvs co -d  UserCode/MBadder/CompareVariables
+
+cd CompareVariables
+
+source scripts/setup.sh
+make
+make exe
+
+1) Make PUweights from already done PU distribution for data and from MC samples (PUit_TrueNumInteractions)
+
+Run the code: ./bin/MakePUweights.exe cfg/MakePUweights.cfg
+
+Paramters to set in the cfg file:   -> inputTree = MC tree name for samples cycling 
+                                    -> inputRootFile = MC samples
+                                    -> inputBranch = Branch to create the MC PU distribution with
+                                    -> inputFileDA = Root file where there is the Data PU distribution
+                                    -> inputFileMC = outputNameMC = Root file where there is the MC PU distribution created with this same code
+                                    -> inputHistoNameDA = Name of the Data PU distribution histo
+                                    -> inputHistoNameMC = Name of the MC PU distribution histo
+                                    -> outputNameMC = inputFileMC = Root file where there is the MC PU distribution created with this same code
+                                    -> outputNamePUre = Output root file name where there is the final PUwights distribution 
+
+2) Draw comparison-plots for simple variables with name beginning with ele1 or ele2:
+
+Run the code: ./bin/drawPlots.exe cfg/drawPlots.cfg
+
+Paramters to set in the cfg file:   -> inputListData = data Root file inputlist 
+                                    -> inputListMC = MC Root file inputlist 
+                                    -> inputTreeData = data Root file tree name 
+                                    -> inputTreeMC = MC Root file tree name 
+                                    -> isReweighted = if you compare data and MC it has to be true in order to reweight
+                                       the MC distributions
+                                    -> inputPuRe = name of the pile-up reweights file, it is necessary if isReweighted = true
+                                    -> inputPuReVar = name of the pile-up reweights variable, related to the
+                                       TPileupReweighting.h class, it is necessary if isReweighted = true
+                                    -> inputVariables = file where there is the list of variables to plot:
+                                       type: int or float
+                                       branch name:
+                                       weight: 0 if the MC-variable doesn't need to be reweighted, 1 otherwise
+                                       nbins_EB: # of bins of the related variable histogram in EB
+                                       bin_min_EB: minimum of the related variable histogram in EB
+                                       bin_max_EB: maximum of the related variable histogram in EB
+                                       nbins_EE: # of bins of the related variable histogram in EE
+                                       bin_min_EE: minimum of the related variable histogram in EE
+                                       bin_max_EE: maximum of the related variable histogram in EE
+                                    -> inputRunIdCutMinDA = runId min-value for runId-cut on Data sample
+                                    -> inputRunIdCutMaxDA = runId max-value for runId-cut on Data sample
+                                    -> inputRunIdCutMinMC = runId min-value for runId-cut on MC sample
+                                    -> inputRunIdCutMaxMC = runId max-value for runId-cut on MC sample
+ 				    -> inputLabelData = name of the data-label (e.g.: LCD)
+                                    -> inputLabelMC = name of the data-label (e.g.: LC1)
+                                    -> inputCompType = MC_vs_MC = name of the comparison label (e.g.: MC_vs_MC)
+                                    -> outputDir = where you want the program to create the .png files
+
+3) Draw comparison-plots for other complex variables:
+
+Run the code: ./bin/drawPlots_Various.exe cfg/drawPlots_Various.cfg
+
+Paramters to set in the cfg file:   -> inputListData = data Root file inputlist 
+                                    -> inputListMC = MC Root file inputlist 
+                                    -> inputTreeData = data Root file tree name 
+                                    -> inputTreeMC = MC Root file tree name 
+                                    -> isReweighted = if you compare data and MC it has to be true in order to reweight
+                                       the MC distributions
+                                    -> inputPuRe = name of the pile-up reweights file, it is necessary if isReweighted = true
+                                    -> inputPuReVar = name of the pile-up reweights variable, related to the
+                                       TPileupReweighting.h class, it is necessary if isReweighted = true
+                                    -> inputRunIdCutMinDA = runId min-value for runId-cut on Data sample
+                                    -> inputRunIdCutMaxDA = runId max-value for runId-cut on Data sample
+                                    -> inputRunIdCutMinMC = runId min-value for runId-cut on MC sample
+                                    -> inputRunIdCutMaxMC = runId max-value for runId-cut on MC sample
+ 				    -> inputLabelData = name of the data-label (e.g.: LCD)
+                                    -> inputLabelMC = name of the MC-label (e.g.: LC1)
+                                    -> inputCompType = MC_vs_MC = name of the comparison label (e.g. MC_vs_MC)
+                                    -> outputDir = where you want the program to create the .png files
+                                    NOTE: in this code the variables are fixed:
+                                          invariant mass variables
+                                          PV_n
+                                          rho
+                                          R9
+                                          LC vs eta
+                                          scE_regression/(scERaw+E_ES) vs eta                                      
+
+4) Draw comparison-plots for any number of histograms:
+   
+Run the code: ./bin/CompareHistos.exe cfg/CompareHistos.cfg
+
+Paramters to set in the cfg file:   -> inputHistoVariables = file where there is for each histo the list of variables:
+                                       RootFile: name of the root file
+                                       HistoName: the name of the histo to be compared
+                                       Label: hosto label (e.g.: MC_runD)
+                                       Color: histo color
+                                       PaveStat x_min
+                                       PaveStat x_max
+                                       PaveStat y_min
+                                       PaveStat y_max
+                                       NOTE: the ratio plots are done between the first listed histo and all the other ones
+                                    -> XMin: comparison plot x-range minimum
+                                    -> XMax: comparison plot x-range maximum
+                                    -> xTitle: comparison plot title on x-axis
+                                    -> OutputName: comparison plot name (png file)
+
+5) Draw comparison-plots for any number of profiles:
+   
+Run the code: ./bin/CompareProfiles.exe cfg/CompareProfiles.cfg
+
+Paramters to set in the cfg file:   -> inputHistoVariables = file where there is for each histo the list of variables:
+                                       RootFile: name of the root file
+                                       ProfileName: the name of the profile to be compared
+                                       Label: profile label (e.g.: MC_runD)
+                                       Color: profile color
+                                       PaveStat x_min
+                                       PaveStat x_max
+                                       PaveStat y_min
+                                       PaveStat y_max
+                                       NOTE: the ratio plots are done between the first listed profile and all the other ones
+                                    -> XMin: comparison plot x-range minimum
+                                    -> XMax: comparison plot x-range maximum
+                                    -> YMin: comparison plot y-range minimum
+                                    -> YMax: comparison plot y-range maximum
+                                    -> xTitle: comparison plot title on x-axis
+                                    -> yTitle: comparison plot title on x-axis
+                                    -> OutputName: comparison plot name (png file)
+
+
+ 

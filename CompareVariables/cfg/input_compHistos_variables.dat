@@ -1,0 +1,3 @@
+/afs/cern.ch/user/c/ccecal/scratch0/www/ValidationPlots/SimulationStudies/DA_runC_vs_MC/compareVariables_Various.root DA_R9_EE DA_runC 1 0.82 0.99 0.70 0.82
+/afs/cern.ch/user/c/ccecal/scratch0/www/ValidationPlots/SimulationStudies/DA_runC_vs_MC/compareVariables_Various.root MC_R9_EE MC 2 0.82 0.99 0.56 0.68
+/afs/cern.ch/user/c/ccecal/scratch0/www/ValidationPlots/SimulationStudies/DA_runC_vs_MC_runC_OOTm300/compareVariables_Various.root MC_R9_EE MC_runC_OOTm300 4 0.82 0.99 0.42 0.54
