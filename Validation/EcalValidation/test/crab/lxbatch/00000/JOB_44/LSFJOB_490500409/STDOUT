@@ -1,0 +1,42 @@
+@(#)CERN job starter $Date: 2010/06/23 14:22:16 $
+Working directory is </pool/lsf/bmarzocc/490500409> on <lxbrg1206.cern.ch>
+
+13-Jan-2014 14:26:11 CET  Initiating request to open file root://eoscms//eos/cms/store/relval/CMSSW_7_0_0_pre9/MinimumBias/RECO/PRE_62_V8_RelVal_mb2012B-v4//00000/7A9116D1-515D-E311-8B2C-0025905A60A6.root?svcClass=default
+13-Jan-2014 14:26:13 CET  Successfully opened file root://eoscms//eos/cms/store/relval/CMSSW_7_0_0_pre9/MinimumBias/RECO/PRE_62_V8_RelVal_mb2012B-v4//00000/7A9116D1-515D-E311-8B2C-0025905A60A6.root?svcClass=default
+140113 14:46:41 20231 Xrd: XrdClientMessage::ReadRaw: Failed to read header (8 bytes).
+13-Jan-2014 14:55:38 CET  Closed file root://eoscms//eos/cms/store/relval/CMSSW_7_0_0_pre9/MinimumBias/RECO/PRE_62_V8_RelVal_mb2012B-v4//00000/7A9116D1-515D-E311-8B2C-0025905A60A6.root?svcClass=default
+
+NUMBER OF EVENTS: 3970
+
+=============================================
+
+MessageLogger Summary
+
+ type     category        sev    module        subroutine        count    total
+ ---- -------------------- -- ---------------- ----------------  -----    -----
+    1                      -w EcalValidationDi                 139844076*139844076
+    2 fileAction           -s file_close                             1        1
+    3 fileAction           -s file_open                              2        2
+
+* Some occurrences of this message were suppressed in all logs, due to limits.
+
+ type    category    Examples: run/evt        run/evt          run/evt
+ ---- -------------------- ---------------- ---------------- ----------------
+    1                      194533/172624787 194533/172624787 194533/330743880
+    2 fileAction           PostEndRun                        
+    3 fileAction           pre-events       pre-events       
+
+Severity    # Occurrences   Total Occurrences
+--------    -------------   -----------------
+Warning         139844076           139844076
+System                  3                   3
+
+Job finished at Mon Jan 13 14:55:42 CET 2014 on node 
+ under linux version Scientific Linux CERN SLC release 5.10 (Boron)
+
+
+CERN statistics: This job used 0:52:16 NCU hours (3136 NCU seconds)
+
+CERN statistics: This job used 0:52:16 KSI2K hours (3136 KSI2K seconds)
+
+KSI2K = kilo-SpecInt2000 benchmark units = 1.00 NCU

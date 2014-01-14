@@ -1,0 +1,41 @@
+@(#)CERN job starter $Date: 2010/06/23 14:22:16 $
+Working directory is </pool/lsf/bmarzocc/490500510> on <lxbst2129.cern.ch>
+
+13-Jan-2014 14:26:19 CET  Initiating request to open file root://eoscms//eos/cms/store/relval/CMSSW_7_0_0_pre9/MinimumBias/RECO/PRE_62_V8_RelVal_mb2012B-v4//00000/9C51B428-4D5D-E311-8EDA-0025905A48D6.root?svcClass=default
+13-Jan-2014 14:26:20 CET  Successfully opened file root://eoscms//eos/cms/store/relval/CMSSW_7_0_0_pre9/MinimumBias/RECO/PRE_62_V8_RelVal_mb2012B-v4//00000/9C51B428-4D5D-E311-8EDA-0025905A48D6.root?svcClass=default
+13-Jan-2014 14:44:23 CET  Closed file root://eoscms//eos/cms/store/relval/CMSSW_7_0_0_pre9/MinimumBias/RECO/PRE_62_V8_RelVal_mb2012B-v4//00000/9C51B428-4D5D-E311-8EDA-0025905A48D6.root?svcClass=default
+
+NUMBER OF EVENTS: 3800
+
+=============================================
+
+MessageLogger Summary
+
+ type     category        sev    module        subroutine        count    total
+ ---- -------------------- -- ---------------- ----------------  -----    -----
+    1                      -w EcalValidationDi                 109068138*109068138
+    2 fileAction           -s file_close                             1        1
+    3 fileAction           -s file_open                              2        2
+
+* Some occurrences of this message were suppressed in all logs, due to limits.
+
+ type    category    Examples: run/evt        run/evt          run/evt
+ ---- -------------------- ---------------- ---------------- ----------------
+    1                      194533/505072377 194533/505072377 194533/576833986
+    2 fileAction           PostEndRun                        
+    3 fileAction           pre-events       pre-events       
+
+Severity    # Occurrences   Total Occurrences
+--------    -------------   -----------------
+Warning         109068138           109068138
+System                  3                   3
+
+Job finished at Mon Jan 13 14:44:26 CET 2014 on node 
+ under linux version Scientific Linux CERN SLC release 5.10 (Boron)
+
+
+CERN statistics: This job used 0:34:45 NCU hours (2085 NCU seconds)
+
+CERN statistics: This job used 0:34:45 KSI2K hours (2085 KSI2K seconds)
+
+KSI2K = kilo-SpecInt2000 benchmark units = 1.00 NCU
