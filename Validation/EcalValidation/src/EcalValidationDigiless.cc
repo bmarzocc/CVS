@@ -82,6 +82,7 @@ using namespace reco;
 EcalValidationDigiless::EcalValidationDigiless(const edm::ParameterSet& ps)
 {
   //now do what ever initialization is needed
+  PVTag_                     = ps.getParameter<edm::InputTag>("PVTag");
   recHitCollection_EB_       = ps.getParameter<edm::InputTag>("recHitCollection_EB");
   recHitCollection_EE_       = ps.getParameter<edm::InputTag>("recHitCollection_EE");
   redRecHitCollection_EB_    = ps.getParameter<edm::InputTag>("redRecHitCollection_EB");
@@ -188,6 +189,8 @@ EcalValidationDigiless::EcalValidationDigiless(const edm::ParameterSet& ps)
   TFileDirectory dirPi0 = fs->mkdir("Pi0");
 
   h_numberOfEvents = fs->make<TH1D>("h_numberOfEvents","h_numberOfEvents",10,0,10);
+   
+  h_PV_n = fs->make<TH1D>("h_PV_n","h_PV_n",50,0.,50.);
   
   // ReducedRecHits ----------------------------------------------
   // ... barrel 
@@ -557,17 +560,17 @@ EcalValidationDigiless::EcalValidationDigiless(const edm::ParameterSet& ps)
   h_recHits_ES_size_R[0]      = fs->make<TH1D>("h_recHits_ES_size_R+","h_recHits_ES_size_R+",1000,0.,10000);
   h_recHits_ES_size_R[1]      = fs->make<TH1D>("h_recHits_ES_size_R-","h_recHits_ES_size_R-",1000,0.,10000);
 
-  h_recHits_ES_energy         = fs->make<TH1D>("h_recHits_ES_energy","h_recHits_ES_energy",1000,0.,0.01);
-  h_recHits_ES_energy_F[0]    = fs->make<TH1D>("h_recHits_ES_energy_F+","h_recHits_ES_energy_F+",1000,0.,0.01);
-  h_recHits_ES_energy_F[1]    = fs->make<TH1D>("h_recHits_ES_energy_F-","h_recHits_ES_energy_F-",1000,0.,0.01);
-  h_recHits_ES_energy_R[0]    = fs->make<TH1D>("h_recHits_ES_energy_R+","h_recHits_ES_energy_R+",1000,0.,0.01);
-  h_recHits_ES_energy_R[1]    = fs->make<TH1D>("h_recHits_ES_energy_R-","h_recHits_ES_energy_R-",1000,0.,0.01);
+  h_recHits_ES_energy         = fs->make<TH1D>("h_recHits_ES_energy","h_recHits_ES_energy",50000,0.,5.);
+  h_recHits_ES_energy_F[0]    = fs->make<TH1D>("h_recHits_ES_energy_F+","h_recHits_ES_energy_F+",50000,0.,5.);
+  h_recHits_ES_energy_F[1]    = fs->make<TH1D>("h_recHits_ES_energy_F-","h_recHits_ES_energy_F-",50000,0.,5.);
+  h_recHits_ES_energy_R[0]    = fs->make<TH1D>("h_recHits_ES_energy_R+","h_recHits_ES_energy_R+",50000,0.,5.);
+  h_recHits_ES_energy_R[1]    = fs->make<TH1D>("h_recHits_ES_energy_R-","h_recHits_ES_energy_R-",50000,0.,5.);
 
-  h_recHits_ES_energyMax      = fs->make<TH1D>("h_recHits_ES_energyMax","h_recHits_ES_energyMax",1000,0.,0.01);
-  h_recHits_ES_energyMax_F[0] = fs->make<TH1D>("h_recHits_ES_energyMax_F+","h_recHits_ES_energyMax_F+",1000,0.,0.01);
-  h_recHits_ES_energyMax_F[1] = fs->make<TH1D>("h_recHits_ES_energyMax_F-","h_recHits_ES_energyMax_F-",1000,0.,0.01);
-  h_recHits_ES_energyMax_R[0] = fs->make<TH1D>("h_recHits_ES_energyMax_R+","h_recHits_ES_energyMax_R+",1000,0.,0.01);
-  h_recHits_ES_energyMax_R[1] = fs->make<TH1D>("h_recHits_ES_energyMax_R-","h_recHits_ES_energyMax_R-",1000,0.,0.01);
+  h_recHits_ES_energyMax      = fs->make<TH1D>("h_recHits_ES_energyMax","h_recHits_ES_energyMax",50000,0.,5.);
+  h_recHits_ES_energyMax_F[0] = fs->make<TH1D>("h_recHits_ES_energyMax_F+","h_recHits_ES_energyMax_F+",50000,0.,5.);
+  h_recHits_ES_energyMax_F[1] = fs->make<TH1D>("h_recHits_ES_energyMax_F-","h_recHits_ES_energyMax_F-",50000,0.,5.);
+  h_recHits_ES_energyMax_R[0] = fs->make<TH1D>("h_recHits_ES_energyMax_R+","h_recHits_ES_energyMax_R+",50000,0.,5.);
+  h_recHits_ES_energyMax_R[1] = fs->make<TH1D>("h_recHits_ES_energyMax_R-","h_recHits_ES_energyMax_R-",50000,0.,5.);
 
   h_recHits_ES_time           = fs->make<TH1D>("h_recHits_ES_time","h_recHits_ES_time",400,-100.,100.);
   h_recHits_ES_time_F[0]      = fs->make<TH1D>("h_recHits_ES_time_F+","h_recHits_ES_time_F+",400,-100.,100.);
@@ -634,7 +637,12 @@ void EcalValidationDigiless::analyze(const edm::Event& ev, const edm::EventSetup
 //   float bx      = ev.bunchCrossing();
 //   float ls      = ev.luminosityBlock();
 //   float orbitNb = ev.orbitNumber();
-
+ 
+  // Vertex Collection
+  edm::Handle<reco::VertexCollection> vertexes;
+  ev.getByLabel(PVTag_, vertexes); 
+  if(vertexes->size() != 1) h_PV_n->Fill(vertexes->size());
+  
   //Get the BS position
   edm::Handle<reco::BeamSpot> recoBeamSpotHandle;
   ev.getByLabel(beamSpot_,recoBeamSpotHandle);
@@ -1580,6 +1588,7 @@ void EcalValidationDigiless::analyze(const edm::Event& ev, const edm::EventSetup
 
 
   int nSCcleaned = 0;
+  int nSC = 0;
 
   for (reco::SuperClusterCollection::const_iterator itSC = theBarrelSuperClusters->begin(); 
        itSC != theBarrelSuperClusters->end(); ++itSC ) {
@@ -1588,6 +1597,8 @@ void EcalValidationDigiless::analyze(const edm::Event& ev, const edm::EventSetup
     double scRawEt = itSC -> rawEnergy() * sin(2.*atan( exp(- itSC->position().eta() )));
     
     if (scEt < scEtThrEB_ ) continue;
+
+    nSC++;
     
     float phi = itSC -> phi();
     float eta = itSC -> eta();
@@ -1683,7 +1694,7 @@ void EcalValidationDigiless::analyze(const edm::Event& ev, const edm::EventSetup
 
   }
 
-  h_superClusters_EB_size         -> Fill( superClusters_EB_h->size() );
+  h_superClusters_EB_size         -> Fill( nSC );
   h_superClusters_EB_size_cleaned -> Fill( nSCcleaned );
 
  

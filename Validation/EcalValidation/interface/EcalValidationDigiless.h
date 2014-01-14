@@ -18,6 +18,10 @@
 
 #include "RecoEcal/EgammaCoreTools/interface/PositionCalc.h"
 
+#include "DataFormats/VertexReco/interface/Vertex.h"
+#include "RecoVertex/PrimaryVertexProducer/interface/PrimaryVertexSorter.h"
+#include "RecoVertex/PrimaryVertexProducer/interface/VertexHigherPtSquared.h"
+
 
 // ROOT include
 #include "TFile.h"
@@ -70,6 +74,7 @@ class EcalValidationDigiless : public edm::EDAnalyzer {
   
 
 	 // ----------member data ---------------------------
+         edm::InputTag PVTag_;
 	 edm::InputTag recHitCollection_EB_;
 	 edm::InputTag recHitCollection_EE_;
          edm::InputTag redRecHitCollection_EB_;
@@ -166,6 +171,7 @@ class EcalValidationDigiless : public edm::EDAnalyzer {
 	 int naiveId_;
 	 
 	 TH1D *h_numberOfEvents;
+         TH1D* h_PV_n;
          
 	 // ReducedRecHits ----------------------------------------------
 	 // ... barrel 

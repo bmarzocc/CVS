@@ -1,5 +1,7 @@
 import FWCore.ParameterSet.Config as cms
 from Configuration.AlCa.GlobalTag import GlobalTag
+import HLTrigger.HLTfilters.hltHighLevel_cfi as hlt
+
 
 process = cms.Process("Validation")
 
@@ -19,7 +21,7 @@ process.load("Configuration.StandardSequences.MagneticField_cff")
 ##noise    
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')  
                                                      
-process.GlobalTag.globaltag = "START53_V7A::All"
+process.GlobalTag.globaltag = "PRE_62_V8::All"
                                                                        
 process.GlobalTag.toGet = cms.VPSet(
             cms.PSet(record = cms.string("EcalPedestalsRcd"),
@@ -43,8 +45,7 @@ process.GlobalTag.toGet = cms.VPSet(
 process.source = cms.Source("PoolSource",
     skipEvents = cms.untracked.uint32(0),                       
     fileNames = cms.untracked.vstring(
-    "root://eoscms.cern.ch//eos/cms/store/relval/CMSSW_5_3_10_patch1/RelValZEE/GEN-SIM-RECO/START53_V7L_PhRD2_rundepMC_11May2013-v1/00000/92128E88-43BD-E211-9AA1-02163E008D8C.root",
-    "root://eoscms.cern.ch//eos/cms /store/relval/CMSSW_5_3_10_patch1/RelValZEE/GEN-SIM-RECO/START53_V7L_PhRD2_rundepMC_11May2013-v1/00000/F22DA61B-45BD-E211-95FF-003048F1749A.root"
+    '/store/relval/CMSSW_7_0_0_pre9/MinimumBias/RECO/PRE_62_V8_gedEG_RelVal_mb2012B-v2/00000/0429F23B-405C-E311-AB48-0025905A60B4.root'
     )
 )
 
@@ -54,6 +55,11 @@ process.maxEvents = cms.untracked.PSet(
     input = cms.untracked.int32(-1)
 )
 
+#HLT selection
+process.filter_1 = hlt.hltHighLevel.clone(
+    HLTPaths = [ 'HLT_DoubleEle*'],
+    throw = False
+    )
 
 # filter on PhysDeclared bit
 process.skimming = cms.EDFilter("PhysDecl",
@@ -85,7 +91,7 @@ process.noscraping = cms.EDFilter("FilterOutScraping",
 process.load("Validation.EcalValidation.ecalvalidationDigiless_cfi")
 
 process.TFileService = cms.Service("TFileService",
-    fileName = cms.string('EcalValidation_RelValZEE_CMSSW_5_3_10_patch1-START53_V7L_PhRD2_rundepMC_11May2013-v1_GEN-SIM-RECO_runD.root')
+    fileName = cms.string('OUTPUTFILENAME.root')
 )
 
 process.p = cms.Path(
@@ -93,6 +99,8 @@ process.p = cms.Path(
     #process.hltLevel1GTSeed*
     #process.noscraping*
     #process.primaryVertexFilter*
+    #process.filter_1*
     process.ecalvalidation
     )
+
 

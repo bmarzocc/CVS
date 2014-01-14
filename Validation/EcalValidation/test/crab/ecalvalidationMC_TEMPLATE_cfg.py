@@ -1,5 +1,6 @@
 import FWCore.ParameterSet.Config as cms
 from Configuration.AlCa.GlobalTag import GlobalTag
+import HLTrigger.HLTfilters.hltHighLevel_cfi as hlt
 
 process = cms.Process("Validation")
 
@@ -19,7 +20,7 @@ process.load("Configuration.StandardSequences.MagneticField_cff")
 ##noise    
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')  
                                                      
-process.GlobalTag.globaltag = "START53_V7A::All"
+process.GlobalTag.globaltag = "START62_V1::All"
                                                                        
 process.GlobalTag.toGet = cms.VPSet(
             cms.PSet(record = cms.string("EcalPedestalsRcd"),
@@ -39,7 +40,7 @@ process.GlobalTag.toGet = cms.VPSet(
 process.source = cms.Source("PoolSource",
     skipEvents = cms.untracked.uint32(0),                       
     fileNames = cms.untracked.vstring(
-    "root://eoscms.cern.ch//eos/cms/store/relval/CMSSW_5_3_9_patch3/RelValZEE/GEN-SIM-DIGI-RAW-HLTDEBUG/START53_V7L_PhRD_24Apr2013-v1/00000/181A5DF8-95AD-E211-AF4A-003048FFD736.root"
+    '/store/relval/CMSSW_6_2_3/RelValDYJetsToLL/GEN-SIM-RECO/PU_START62_V1_rundepMC203002_dvmc-v2/00000/004136B2-9740-E311-849A-02163E008CCF.root'
     )
 )
 
@@ -49,6 +50,11 @@ process.maxEvents = cms.untracked.PSet(
     input = cms.untracked.int32(-1)
 )
 
+#HLT selection
+process.filter_1 = hlt.hltHighLevel.clone(
+    HLTPaths = [ 'HLT_Ele*'],
+    throw = False
+    )
 
 # filter on PhysDeclared bit
 process.skimming = cms.EDFilter("PhysDecl",
@@ -80,7 +86,7 @@ process.noscraping = cms.EDFilter("FilterOutScraping",
 process.load("Validation.EcalValidation.ecalvalidation_cfi")
 
 process.TFileService = cms.Service("TFileService",
-    fileName = cms.string('EcalValidation_RelValZEE_CMSSW_5_3_9_patch3-START53_V7L_PhRD_24Apr2013-v1_GEN-SIM-DIGI-RAW-HLTDEBUG.root')
+    fileName = cms.string('EcalValidation.root')
 )
 
 process.p = cms.Path(
@@ -88,6 +94,7 @@ process.p = cms.Path(
     #process.hltLevel1GTSeed*
     #process.noscraping*
     #process.primaryVertexFilter*
+    process.filter_1*
     process.ecalvalidation
     )
 
